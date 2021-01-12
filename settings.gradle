@@ -1,0 +1,6 @@
+rootProject.name = 'liberator'
+include 'liberator-core'
+include 'liberator-templates'
+include 'liberator-definitions'
+include 'liberator-generator'
+
