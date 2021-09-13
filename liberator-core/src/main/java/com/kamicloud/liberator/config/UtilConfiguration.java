@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.imba.config;
+package com.kamicloud.liberator.config;
 
 import com.kamicloud.liberator.utils.StringUtil;
 import com.kamicloud.liberator.utils.UrlUtil;

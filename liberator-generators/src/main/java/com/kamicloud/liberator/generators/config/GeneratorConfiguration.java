@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.imba.config;
+package com.kamicloud.liberator.generators.config;
 
 import com.kamicloud.liberator.generators.*;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableAspectJAutoProxy
-public class WriterConfiguration {
+public class GeneratorConfiguration {
 
     @Bean
     public PostmanGenerator postmanWriter() {

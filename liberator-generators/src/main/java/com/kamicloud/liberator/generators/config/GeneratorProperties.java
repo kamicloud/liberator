@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.config;
+package com.kamicloud.liberator.generators.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

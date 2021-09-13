@@ -1,6 +1,6 @@
 package com.kamicloud.liberator.generators;
 
-import com.kamicloud.liberator.config.GeneratorProperties;
+import com.kamicloud.liberator.generators.config.GeneratorProperties;
 import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.utils.StringUtil;
 import com.kamicloud.liberator.utils.UrlUtil;

@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.config;
+package com.kamicloud.liberator.imba.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

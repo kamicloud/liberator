@@ -1,6 +1,6 @@
 package com.kamicloud.liberator.imba;
 
-import com.kamicloud.liberator.config.ApplicationProperties;
+import com.kamicloud.liberator.imba.config.ApplicationProperties;
 import com.kamicloud.liberator.config.DefaultProfileUtil;
 import com.kamicloud.liberator.parsers.DocParser;
 import com.kamicloud.liberator.parsers.Parser;
@@ -16,7 +16,7 @@ import org.springframework.boot.SpringApplication;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.kamicloud.liberator"})
 @EnableConfigurationProperties({ApplicationProperties.class})
 public class Main {
 
@@ -78,13 +78,13 @@ public class Main {
         output.postParse();
 
         // 注册处理器
-        postmanWriter.updatex(output);
         testCaseGenerator.updatex(output);
         docWriter.updatex(output);
         laravelWriter.updatex(output);
         nodeJsClientWriter.updatex(output);
         autoTestWriter.updatex(output);
         openAPIWriter.updatex(output);
+        postmanWriter.updatex(output);
     }
 
     public static void main(String[] args) {
