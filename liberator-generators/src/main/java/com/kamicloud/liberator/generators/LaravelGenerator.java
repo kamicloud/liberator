@@ -11,6 +11,7 @@ import definitions.annotations.Optional;
 import definitions.official.TypeSpec;
 import definitions.types.Type;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -52,11 +53,11 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
     }};
 
     @Override
-    String getName() {
+    public String getName() {
         return "laravel";
     }
 
-    @Override
+    @PostConstruct
     void postConstruct() {
         boFolder = env.getProperty("generator.generators.laravel.bo-folder", "BOs");
         serviceFolder = env.getProperty("generator.generators.laravel.service-folder", "Services");
@@ -98,7 +99,7 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
     }
 
     @Override
-    public void update(OutputStub output) {
+    public void run() {
         output.getTemplates().forEach((version, templateStub) -> {
             try {
                 ClassCombiner.setNamespacePathTransformer(this);

@@ -4,14 +4,15 @@
 # 所有相对路径以本项目根目录为准
 # ===================================================================
 
+liberator:
+  generators:
+    - laravel
+    - laravel-doc
+    - postman
+    - testcases
+    - openapi
 generator:
   process:
-    defaults:
-      - laravel
-      - laravel-doc
-      - postman
-      - testcases
-      - openapi
     laravel-auto-test:
       - laravel-auto-test
     client:

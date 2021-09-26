@@ -24,17 +24,12 @@ public class DocGenerator extends BaseGenerator {
     private String docPrefix;
 
     @Override
-    String getName() {
+    public String getName() {
         return "laravel-doc";
     }
 
     @Override
-    void postConstruct() {
-
-    }
-
-    @Override
-    public void update(OutputStub output) {
+    public void run() {
         docPath = new File(Objects.requireNonNull(env.getProperty(
             "generator.generators.laravel-doc.path"
         )) + "/resources/docs");

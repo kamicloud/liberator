@@ -6,6 +6,7 @@ import com.kamicloud.liberator.generators.components.common.FileCombiner;
 import com.kamicloud.liberator.generators.components.common.MultiLinesCombiner;
 import org.thymeleaf.context.Context;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -16,11 +17,11 @@ public class NodeJsClientGenerator extends BaseGenerator {
     protected File outputDir;
 
     @Override
-    String getName() {
+    public String getName() {
         return "nodejs-client";
     }
 
-    @Override
+    @PostConstruct
     void postConstruct() {
         outputDir = new File(Objects.requireNonNull(env.getProperty("generator.generators.nodejs-client.output")));
 
@@ -28,10 +29,10 @@ public class NodeJsClientGenerator extends BaseGenerator {
     }
 
     @Override
-    public void update(OutputStub o) {
-        o.getTemplates().forEach(this::writeTemplate);
+    public void run() {
+        output.getTemplates().forEach(this::writeTemplate);
 
-        writeTemplate("", o.getCurrentTemplate());
+        writeTemplate("", output.getCurrentTemplate());
     }
 
     void writeTemplate(String version, TemplateStub templateStub) {

@@ -26,9 +26,6 @@ dependencies {
     implementation 'org.yaml:snakeyaml:1.29'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
 
 test {

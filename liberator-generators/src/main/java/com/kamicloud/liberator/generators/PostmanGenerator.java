@@ -20,17 +20,12 @@ public class PostmanGenerator extends BaseGenerator {
 
 
     @Override
-    String getName() {
+    public String getName() {
         return "postman";
     }
 
     @Override
-    void postConstruct() {
-
-    }
-
-    @Override
-    public void update(OutputStub output) {
+    public void run() {
         outputPath = new File(Objects.requireNonNull(env.getProperty("generator.generators.postman.path")) + "/API Generator.postman_collection.json");
 
         try {

@@ -10,17 +10,12 @@ public class TestCaseGenerator extends BaseGenerator {
     private File outputDir;
 
     @Override
-    String getName() {
+    public String getName() {
         return "testcases";
     }
 
     @Override
-    void postConstruct() {
-
-    }
-
-    @Override
-    public void update(OutputStub output) {
+    public void run() {
         this.outputDir = new File(env.getProperty("generator.generators.testcases.path", ""));
         writeTestCases(output);
     }

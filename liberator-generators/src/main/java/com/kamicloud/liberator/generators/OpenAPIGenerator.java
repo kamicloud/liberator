@@ -1,6 +1,5 @@
 package com.kamicloud.liberator.generators;
 
-import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.stubs.core.TemplateStub;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -10,18 +9,13 @@ import java.util.*;
 
 public class OpenAPIGenerator extends BaseGenerator {
     @Override
-    String getName() {
+    public String getName() {
         return "openapi";
     }
 
     @Override
-    void postConstruct() {
-
-    }
-
-    @Override
-    public void update(OutputStub o) {
-        o.getTemplates().forEach((version, templateStub) -> {
+    public void run() {
+        output.getTemplates().forEach((version, templateStub) -> {
             LinkedHashMap<String, Object> obj = writeTemplate(version, templateStub);
 
             DumperOptions dumperOptions = new DumperOptions();

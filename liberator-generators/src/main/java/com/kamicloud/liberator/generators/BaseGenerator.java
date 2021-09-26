@@ -1,5 +1,6 @@
 package com.kamicloud.liberator.generators;
 
+import com.kamicloud.liberator.Generator;
 import com.kamicloud.liberator.generators.config.GeneratorProperties;
 import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.utils.StringUtil;
@@ -12,14 +13,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import java.io.File;
 import java.util.*;
 
-@Component
-abstract class BaseGenerator {
+abstract class BaseGenerator extends Generator {
     File dir = new File("");
-    @Autowired
-    protected SpringTemplateEngine springTemplateEngine;
-
-    @Autowired
-    protected Environment env;
 
     @Autowired
     protected UrlUtil urlUtil;
@@ -31,29 +26,4 @@ abstract class BaseGenerator {
     GeneratorProperties generatorProperties;
 
     protected HashMap<String, String> processes = new HashMap<>();
-
-    public void updatex(OutputStub o) {
-        String name = getName();
-        ArrayList<String> generators;
-        GeneratorProperties.Process process = generatorProperties.getProcess();
-
-        if (env.getProperty("process", "").equals("laravel-auto-test")) {
-            generators = process.getLaravelAutoTest();
-        } else {
-            generators = process.getDefaults();
-        }
-
-        if (generators == null || !generators.contains(name)) {
-            return;
-        }
-
-        postConstruct();
-        update((OutputStub) o);
-    }
-
-    abstract String getName();
-
-    abstract void postConstruct();
-
-    public abstract void update(OutputStub o);
 }

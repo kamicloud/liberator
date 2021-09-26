@@ -15,17 +15,12 @@ public class JavaClientGenerator extends BaseGenerator {
     private File outputDir;
 
     @Override
-    String getName() {
+    public String getName() {
         return "java-client";
     }
 
     @Override
-    void postConstruct() {
-
-    }
-
-    @Override
-    public void update(OutputStub output) {
+    public void run() {
         String javaClientPath = Objects.requireNonNull(env.getProperty("generator.java-client.path"));
         String javaClasspath = Objects.requireNonNull(env.getProperty("generator.java-client.classpath"));
         outputDir = new File(javaClientPath);

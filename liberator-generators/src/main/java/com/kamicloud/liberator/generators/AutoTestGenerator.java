@@ -25,17 +25,12 @@ public class AutoTestGenerator extends BaseGenerator implements PHPNamespacePath
     private LinkedList<TestCaseStub> rawTestCases = new LinkedList<>();
 
     @Override
-    String getName() {
+    public String getName() {
         return "laravel-auto-test";
     }
 
     @Override
-    void postConstruct() {
-
-    }
-
-    @Override
-    public void update(OutputStub output) {
+    public void run() {
         outputDir = new File(Objects.requireNonNull(env.getProperty("generator.generators.laravel-auto-test.path")));
         root = new File(env.getProperty("generator.generators.laravel-auto-test.testcases-path", ""));
         File testDir = new File(outputDir.getAbsolutePath() + "/tests/Generated");

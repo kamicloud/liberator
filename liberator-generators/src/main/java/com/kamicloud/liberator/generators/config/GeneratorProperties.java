@@ -64,17 +64,8 @@ public class GeneratorProperties {
     }
 
     public static class Process {
-        private ArrayList<String> defaults;
         private ArrayList<String> laravelAutoTest;
         private ArrayList<String> client;
-
-        public ArrayList<String> getDefaults() {
-            return defaults;
-        }
-
-        public void setDefaults(ArrayList<String> defaults) {
-            this.defaults = defaults;
-        }
 
         public ArrayList<String> getLaravelAutoTest() {
             return laravelAutoTest;
