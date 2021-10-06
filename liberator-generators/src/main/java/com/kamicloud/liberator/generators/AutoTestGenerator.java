@@ -3,7 +3,7 @@ package com.kamicloud.liberator.generators;
 import com.kamicloud.liberator.config.DefaultProfileUtil;
 import com.kamicloud.liberator.interfaces.PHPNamespacePathTransformerInterface;
 import com.kamicloud.liberator.stubs.core.OutputStub;
-import com.kamicloud.liberator.stubs.testcase.TestCaseStub;
+import com.kamicloud.liberator.generators.stubs.testcase.TestCaseStub;
 import com.kamicloud.liberator.utils.FileUtil;
 import com.kamicloud.liberator.utils.UrlUtil;
 import com.kamicloud.liberator.generators.components.common.FileCombiner;

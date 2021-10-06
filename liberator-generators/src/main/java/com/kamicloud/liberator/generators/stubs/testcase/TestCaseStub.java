@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.stubs.testcase;
+package com.kamicloud.liberator.generators.stubs.testcase;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

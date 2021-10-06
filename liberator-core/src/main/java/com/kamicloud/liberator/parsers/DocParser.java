@@ -6,6 +6,7 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.javadoc.Javadoc;
+import com.kamicloud.liberator.config.LiberatorProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 
@@ -20,11 +21,15 @@ public class DocParser {
     public static HashMap<String, String> classDocHashMap = new HashMap<>();
 
     @Autowired
+    LiberatorProperties liberatorProperties;
+
+    @Autowired
     Environment env;
 
     public void parse() {
-        String codePath = env.getProperty("generator.template-path", "./src/main/java/templates");
-        File templateDir = new File(codePath + "/templates");
+        String templatePath = liberatorProperties.getTemplatePath();
+
+        File templateDir = new File(templatePath + "/templates");
         File[] templateFiles = templateDir.listFiles();
 
         if (templateFiles == null) {

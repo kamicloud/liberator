@@ -21,8 +21,7 @@ public class NodeJsClientGenerator extends BaseGenerator {
         return "nodejs-client";
     }
 
-    @PostConstruct
-    void postConstruct() {
+    void setup() {
         outputDir = new File(Objects.requireNonNull(env.getProperty("generator.generators.nodejs-client.output")));
 
         outputDir.mkdirs();
@@ -30,6 +29,7 @@ public class NodeJsClientGenerator extends BaseGenerator {
 
     @Override
     public void run() {
+        this.setup();
         output.getTemplates().forEach(this::writeTemplate);
 
         writeTemplate("", output.getCurrentTemplate());

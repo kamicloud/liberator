@@ -2,23 +2,20 @@ package com.kamicloud.liberator.generators;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kamicloud.liberator.exceptions.internal.OutputPathInvalidException;
 import com.kamicloud.liberator.utils.UrlUtil;
 import definitions.annotations.Request;
 import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.stubs.core.TemplateStub;
-import com.kamicloud.liberator.stubs.postman.*;
+import com.kamicloud.liberator.generators.stubs.postman.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Objects;
 
 public class PostmanGenerator extends BaseGenerator {
-    private File outputPath;
-
-
     @Override
     public String getName() {
         return "postman";
@@ -26,25 +23,30 @@ public class PostmanGenerator extends BaseGenerator {
 
     @Override
     public void run() {
-        outputPath = new File(Objects.requireNonNull(env.getProperty("generator.generators.postman.path")) + "/API Generator.postman_collection.json");
+        String postmanPath = generatorProperties.getGenerators().getPostman().getPath();
+
+        File outputFile = new File(postmanPath);
+        File outputPath = outputFile.getParentFile();
+
+        outputPath.mkdirs();
+
+        if (!outputPath.exists()) {
+            throw new OutputPathInvalidException(outputPath.getAbsolutePath());
+        }
 
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
             PostmanStub postmanStub = postmanOutput(output);
 
-            output.getTemplates().forEach((version, templateStub) -> {
-            });
-
             String jsonString = gson.toJson(postmanStub);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(outputPath.getAbsolutePath());
+            FileOutputStream fileOutputStream = new FileOutputStream(outputFile.getAbsolutePath());
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
             outputStreamWriter.write(jsonString);
 
             outputStreamWriter.close();
             fileOutputStream.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

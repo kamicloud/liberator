@@ -10,42 +10,42 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class GeneratorConfiguration {
 
     @Bean
-    public PostmanGenerator postmanWriter() {
+    public PostmanGenerator postmanGenerator() {
         return new PostmanGenerator();
     }
 
     @Bean
-    public LaravelGenerator laravelWriter() {
+    public LaravelGenerator laravelGenerator() {
         return new LaravelGenerator();
     }
 
     @Bean
-    public JavaClientGenerator javaClientWriter() {
+    public JavaClientGenerator javaClientGenerator() {
         return new JavaClientGenerator();
     }
 
     @Bean
-    public TestCaseGenerator testCaseWriter() {
+    public TestCaseGenerator testCaseGenerator() {
         return new TestCaseGenerator();
     }
 
     @Bean
-    public DocGenerator docWriter() {
+    public DocGenerator docGenerator() {
         return new DocGenerator();
     }
 
     @Bean
-    public AutoTestGenerator autoTestWriter() {
+    public AutoTestGenerator autoTestGenerator() {
         return new AutoTestGenerator();
     }
 
     @Bean
-    public NodeJsClientGenerator nodeJsClientWriter() {
+    public NodeJsClientGenerator nodeJsClientGenerator() {
         return new NodeJsClientGenerator();
     }
 
     @Bean
-    public OpenAPIGenerator openAPIWriter() {
+    public OpenAPIGenerator openAPIGenerator() {
         return new OpenAPIGenerator();
     }
 }

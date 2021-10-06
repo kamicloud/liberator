@@ -57,8 +57,7 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
         return "laravel";
     }
 
-    @PostConstruct
-    void postConstruct() {
+    void setup() {
         boFolder = env.getProperty("generator.generators.laravel.bo-folder", "BOs");
         serviceFolder = env.getProperty("generator.generators.laravel.service-folder", "Services");
         serviceSuffix = env.getProperty("generator.generators.laravel.service-suffix", "Service");
@@ -100,6 +99,7 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
 
     @Override
     public void run() {
+        this.setup();
         output.getTemplates().forEach((version, templateStub) -> {
             try {
                 ClassCombiner.setNamespacePathTransformer(this);

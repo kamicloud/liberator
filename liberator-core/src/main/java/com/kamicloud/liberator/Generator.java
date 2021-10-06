@@ -1,6 +1,7 @@
 package com.kamicloud.liberator;
 
 import com.kamicloud.liberator.stubs.core.OutputStub;
+import com.kamicloud.liberator.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,9 @@ public abstract class Generator {
 
     @Autowired
     protected Environment env;
+
+    @Autowired
+    protected StringUtil stringUtil;
 
     public Generator() {
         LiberatorManager.addGenerator(this);

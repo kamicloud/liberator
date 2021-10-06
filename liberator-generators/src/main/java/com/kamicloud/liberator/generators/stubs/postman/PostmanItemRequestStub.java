@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.stubs.postman;
+package com.kamicloud.liberator.generators.stubs.postman;
 
 import java.util.ArrayList;
 

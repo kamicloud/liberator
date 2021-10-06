@@ -9,6 +9,7 @@ liberator:
     - laravel
     - laravel-doc
     - postman
+  template-path: ./resources/generator
 generator:
   process:
     laravel-auto-test:
@@ -17,13 +18,12 @@ generator:
       - nodejs-client
   env: dev
   api-prefix: api
-  template-path: ./resources/generator
 
   test-host: http://localhost
 
   generators:
     postman:
-      path: .
+      path: ./generated_api.postman_collection.json
     testcases:
       path: ./resources/generator/testcases
 

@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @ConfigurationProperties(prefix = "generator", ignoreUnknownFields = false)
 @Component
@@ -162,7 +163,7 @@ public class GeneratorProperties {
             private String path;
 
             public String getPath() {
-                return path;
+                return Objects.requireNonNull(path);
             }
 
             public void setPath(String path) {

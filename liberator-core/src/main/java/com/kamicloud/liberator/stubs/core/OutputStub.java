@@ -5,17 +5,13 @@ import com.kamicloud.liberator.utils.UrlUtil;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Observable;
 
 public class OutputStub {
     private HashMap<String, TemplateStub> templates = new HashMap<>();
 
-    /**
-     * 当前的接口版本
-     */
     private TemplateStub currentTemplate;
 
-    private LinkedList<ErrorStub> errors = new LinkedList<>();
+    private final LinkedList<ErrorStub> errors = new LinkedList<>();
 
     public HashMap<String, TemplateStub> getTemplates() {
         return templates;

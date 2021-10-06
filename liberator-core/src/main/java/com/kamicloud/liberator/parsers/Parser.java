@@ -27,7 +27,7 @@ public class Parser {
     /**
      * 标量数据对应的类型
      */
-    private HashMap<String, Type> typeMap = new HashMap<String, Type>() {{
+    private final HashMap<String, Type> typeMap = new HashMap<>() {{
         put("int", new ScalarInteger());
         put("Integer", new ScalarInteger());
         put("long", new ScalarInteger());

@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.stubs.openapi;
+package com.kamicloud.liberator.generators.stubs.openapi;
 
 public class OpenApiPropertyStub {
     String type;

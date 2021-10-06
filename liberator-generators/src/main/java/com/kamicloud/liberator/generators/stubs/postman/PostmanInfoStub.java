@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.stubs.postman;
+package com.kamicloud.liberator.generators.stubs.postman;
 
 public class PostmanInfoStub {
     private String _postman_id;
