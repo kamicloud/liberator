@@ -2,18 +2,16 @@ plugins {
     id 'java'
 }
 
+group 'com.kamicloud.liberator'
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation project(':liberator-core')
     implementation project(':liberator-definitions')
-    implementation project(':liberator-templates')
-
-    implementation 'com.github.javaparser:javaparser-core:3.23.0'
-    implementation 'com.github.javaparser:javaparser-symbol-solver-core:3.23.0'
-    implementation 'com.github.javaparser:javaparser-core-serialization:3.23.0'
-
+    implementation project(':liberator-generators')
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
     implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-logging:2.5.4'

@@ -1,12 +1,10 @@
-package com.kamicloud.liberator.generators;
+package com.kamicloud.liberator.laravel;
 
-import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.stubs.core.TemplateStub;
-import com.kamicloud.liberator.generators.components.common.FileCombiner;
-import com.kamicloud.liberator.generators.components.common.MultiLinesCombiner;
+import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.generators.components.MultiLinesCombiner;
 import org.thymeleaf.context.Context;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -22,7 +20,7 @@ public class NodeJsClientGenerator extends BaseGenerator {
     }
 
     void setup() {
-        outputDir = new File(Objects.requireNonNull(env.getProperty("generator.generators.nodejs-client.output")));
+        outputDir = new File(Objects.requireNonNull(env.getProperty("liberator-laravel.nodejs-client.output")));
 
         outputDir.mkdirs();
     }

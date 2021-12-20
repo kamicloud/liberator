@@ -1,10 +1,10 @@
-package com.kamicloud.liberator.generators;
+package com.kamicloud.liberator.laravel;
 
 import com.google.common.base.CaseFormat;
 import com.kamicloud.liberator.utils.CommentUtil;
 import com.kamicloud.liberator.utils.UrlUtil;
-import com.kamicloud.liberator.generators.components.common.FileCombiner;
-import com.kamicloud.liberator.generators.components.common.MultiLinesCombiner;
+import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.generators.components.MultiLinesCombiner;
 import definitions.annotations.Methods;
 import definitions.annotations.Named;
 import definitions.annotations.Optional;
@@ -31,9 +31,9 @@ public class DocGenerator extends BaseGenerator {
     @Override
     public void run() {
         docPath = new File(Objects.requireNonNull(env.getProperty(
-            "generator.generators.laravel-doc.path"
+            "liberator-laravel.laravel-doc.path"
         )) + "/resources/docs");
-        docPrefix = env.getProperty("generator.generators.laravel-doc.http-prefix", "docs");
+        docPrefix = env.getProperty("liberator-laravel.laravel-doc.http-prefix", "docs");
         output.getTemplates().forEach((version, templateStub) -> {
             outputDir = new File(docPath.getAbsolutePath() + "/" + version);
             File generatedDir = new File(outputDir.getAbsolutePath() + "/generated");

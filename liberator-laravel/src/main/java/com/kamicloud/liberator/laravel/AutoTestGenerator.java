@@ -1,14 +1,14 @@
-package com.kamicloud.liberator.generators;
+package com.kamicloud.liberator.laravel;
 
 import com.kamicloud.liberator.config.DefaultProfileUtil;
-import com.kamicloud.liberator.interfaces.PHPNamespacePathTransformerInterface;
+import com.kamicloud.liberator.laravel.interfaces.PHPNamespacePathTransformerInterface;
 import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.generators.stubs.testcase.TestCaseStub;
 import com.kamicloud.liberator.utils.FileUtil;
 import com.kamicloud.liberator.utils.UrlUtil;
-import com.kamicloud.liberator.generators.components.common.FileCombiner;
-import com.kamicloud.liberator.generators.components.php.ClassCombiner;
-import com.kamicloud.liberator.generators.components.php.ClassMethodCombiner;
+import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.laravel.components.ClassCombiner;
+import com.kamicloud.liberator.laravel.components.ClassMethodCombiner;
 import okhttp3.*;
 
 import java.io.*;
@@ -31,8 +31,8 @@ public class AutoTestGenerator extends BaseGenerator implements PHPNamespacePath
 
     @Override
     public void run() {
-        outputDir = new File(Objects.requireNonNull(env.getProperty("generator.generators.laravel-auto-test.path")));
-        root = new File(env.getProperty("generator.generators.laravel-auto-test.testcases-path", ""));
+        outputDir = new File(Objects.requireNonNull(env.getProperty("liberator-laravel.laravel-auto-test.path")));
+        root = new File(env.getProperty("liberator-laravel.laravel-auto-test.testcases-path", ""));
         File testDir = new File(outputDir.getAbsolutePath() + "/tests/Generated");
         if (DefaultProfileUtil.isAutoTestForceReplace()) {
             FileUtil.deleteAllFilesOfDir(testDir);

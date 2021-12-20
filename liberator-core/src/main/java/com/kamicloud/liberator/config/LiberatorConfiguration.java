@@ -2,7 +2,7 @@ package com.kamicloud.liberator.config;
 
 import com.kamicloud.liberator.LiberatorManager;
 import com.kamicloud.liberator.parsers.DocParser;
-import com.kamicloud.liberator.parsers.Parser;
+import com.kamicloud.liberator.parsers.BuildParser;
 import com.kamicloud.liberator.stubs.core.OutputStub;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,8 +19,8 @@ public class LiberatorConfiguration {
     }
 
     @Bean
-    public Parser parser() {
-        return new Parser();
+    public BuildParser parser() {
+        return new BuildParser();
     }
 
     @Bean

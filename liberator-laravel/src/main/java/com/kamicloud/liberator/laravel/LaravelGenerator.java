@@ -1,17 +1,16 @@
-package com.kamicloud.liberator.generators;
+package com.kamicloud.liberator.laravel;
 
 import com.google.common.base.CaseFormat;
-import com.kamicloud.liberator.interfaces.PHPNamespacePathTransformerInterface;
+import com.kamicloud.liberator.laravel.interfaces.PHPNamespacePathTransformerInterface;
 import com.kamicloud.liberator.stubs.core.*;
 import com.kamicloud.liberator.utils.FileUtil;
-import com.kamicloud.liberator.generators.components.common.FileCombiner;
-import com.kamicloud.liberator.generators.components.php.*;
+import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.laravel.components.*;
 import definitions.annotations.*;
 import definitions.annotations.Optional;
 import definitions.official.TypeSpec;
 import definitions.types.Type;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -58,36 +57,36 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
     }
 
     void setup() {
-        boFolder = env.getProperty("generator.generators.laravel.bo-folder", "BOs");
-        serviceFolder = env.getProperty("generator.generators.laravel.service-folder", "Services");
-        serviceSuffix = env.getProperty("generator.generators.laravel.service-suffix", "Service");
+        boFolder = env.getProperty("liberator-laravel.laravel.bo-folder", "BOs");
+        serviceFolder = env.getProperty("liberator-laravel.laravel.service-folder", "Services");
+        serviceSuffix = env.getProperty("liberator-laravel.laravel.service-suffix", "Service");
 
         valueHelperNamespace = env.getProperty(
-            "generator.generators.laravel.value-helper-namespace",
+            "liberator-laravel.laravel.value-helper-namespace",
             "Kamicloud\\StubApi\\Concerns\\ValueHelper"
         );
 
         baseDTONamespace = env.getProperty(
-            "generator.generators.laravel.base-dto-namespace",
+            "liberator-laravel.laravel.base-dto-namespace",
             "Kamicloud\\StubApi\\DTOs\\DTO"
         );
 
         baseMessageNamespace = env.getProperty(
-            "generator.generators.laravel.base-message-namespace",
+            "liberator-laravel.laravel.base-message-namespace",
             "Kamicloud\\StubApi\\Http\\Messages\\Message"
         );
 
         baseEnumNamespace = env.getProperty(
-            "generator.generators.laravel.base-enum-namespace",
+            "liberator-laravel.laravel.base-enum-namespace",
             "Kamicloud\\StubApi\\BOs\\Enum"
         );
 
         baseExceptionNamespace = env.getProperty(
-            "generator.generators.laravel.base-exception-namespace",
+            "liberator-laravel.laravel.base-exception-namespace",
             "Kamicloud\\StubApi\\Exceptions\\BaseException"
         );
 
-        String laravelPath = Objects.requireNonNull(env.getProperty("generator.generators.laravel.path"));
+        String laravelPath = Objects.requireNonNull(env.getProperty("liberator-laravel.laravel.path"));
         outputDir = new File(laravelPath);
         if (!outputDir.exists()) {
             outputDir.mkdirs();

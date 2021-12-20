@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.generators.components.php;
+package com.kamicloud.liberator.laravel.components;
 
 import com.kamicloud.liberator.stubs.core.EnumStub;
 import com.kamicloud.liberator.interfaces.CombinerInterface;

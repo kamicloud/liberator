@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.generators.components.common;
+package com.kamicloud.liberator.generators.components;
 
 import com.kamicloud.liberator.config.DefaultProfileUtil;
 import com.kamicloud.liberator.interfaces.CombinerInterface;

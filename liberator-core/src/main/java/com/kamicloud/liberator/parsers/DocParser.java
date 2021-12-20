@@ -17,14 +17,13 @@ import java.util.HashMap;
 import java.util.Optional;
 
 @SuppressWarnings("unused")
-public class DocParser {
+public class DocParser extends Parser {
     public static HashMap<String, String> classDocHashMap = new HashMap<>();
 
-    @Autowired
-    LiberatorProperties liberatorProperties;
-
-    @Autowired
-    Environment env;
+    @Override
+    public String getName() {
+        return "doc-parser";
+    }
 
     public void parse() {
         String templatePath = liberatorProperties.getTemplatePath();

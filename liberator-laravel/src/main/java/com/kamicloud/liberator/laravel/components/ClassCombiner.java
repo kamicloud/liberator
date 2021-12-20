@@ -1,8 +1,8 @@
-package com.kamicloud.liberator.generators.components.php;
+package com.kamicloud.liberator.laravel.components;
 
-import com.kamicloud.liberator.interfaces.PHPNamespacePathTransformerInterface;
 import com.kamicloud.liberator.interfaces.CombinerInterface;
-import com.kamicloud.liberator.generators.components.common.FileWriter;
+import com.kamicloud.liberator.generators.components.FileWriter;
+import com.kamicloud.liberator.laravel.interfaces.PHPNamespacePathTransformerInterface;
 
 import java.io.*;
 import java.util.ArrayList;

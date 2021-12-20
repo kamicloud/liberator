@@ -30,31 +30,25 @@ generator:
       path: ./output/generated_api.postman_collection.json
     testcases:
       path: ./output/testcases
+liberator-laravel:
+  laravel:
+    path: ./output/laravel
 
-    laravel:
-      path: ./output/laravel
-
-      bo-suffix: BO
-      bo-folder: BOs
-      dto-suffix: DTO
-      dto-folder: DTOs
-      service-suffix: Service
-      service-folder: Services
-    laravel-doc:
-      path: ./output/larecipe
-      http-prefix: docs
-    laravel-auto-test:
-      path: ./output/tests
-      force-replace: false
-      testcases-path: ./output/testcases
-
-
-    nodejs-client:
-      output: ./output/nodejs-client
-    java-client:
-      path: ./output/java-client
-      classpath:
-
+    bo-suffix: BO
+    bo-folder: BOs
+    dto-suffix: DTO
+    dto-folder: DTOs
+    service-suffix: Service
+    service-folder: Services
+  laravel-doc:
+    path: ./output/larecipe
+    http-prefix: docs
+  laravel-auto-test:
+    path: ./output/tests
+    force-replace: false
+    testcases-path: ./output/testcases
+  nodejs-client:
+    output: ./output/nodejs-client
 spring:
   thymeleaf:
     mode: TEXT

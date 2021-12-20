@@ -1,9 +1,9 @@
-package com.kamicloud.liberator.generators.components.php;
+package com.kamicloud.liberator.laravel.components;
 
 import com.kamicloud.liberator.interfaces.CombinerInterface;
-import com.kamicloud.liberator.generators.components.common.FileCombiner;
-import com.kamicloud.liberator.generators.components.common.Combiner;
-import com.kamicloud.liberator.generators.components.common.FileWriter;
+import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.generators.components.Combiner;
+import com.kamicloud.liberator.generators.components.FileWriter;
 
 import java.io.IOException;
 

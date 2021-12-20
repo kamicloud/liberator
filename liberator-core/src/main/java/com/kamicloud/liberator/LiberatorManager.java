@@ -2,7 +2,7 @@ package com.kamicloud.liberator;
 
 import com.kamicloud.liberator.config.LiberatorProperties;
 import com.kamicloud.liberator.parsers.DocParser;
-import com.kamicloud.liberator.parsers.Parser;
+import com.kamicloud.liberator.parsers.BuildParser;
 import com.kamicloud.liberator.stubs.core.OutputStub;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,13 +19,13 @@ public class LiberatorManager {
     private OutputStub output;
 
     @Autowired
-    private Parser parser;
+    private BuildParser buildParser;
 
     @Autowired
     private DocParser docParser;
 
     public void run() {
-        parser.parse();
+        buildParser.parse();
         docParser.parse();
 
         output.postParse();

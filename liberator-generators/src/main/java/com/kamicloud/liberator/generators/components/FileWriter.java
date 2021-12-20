@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.generators.components.common;
+package com.kamicloud.liberator.generators.components;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.generators.components.java;
+package com.kamicloud.liberator.laravel.components;
 
 import com.kamicloud.liberator.interfaces.CombinerInterface;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @SuppressWarnings("unused")
-public class ClassMethodCombiner implements CombinerInterface, AddImportInterface {
+public class ClassMethodCombiner implements CombinerInterface, AddUseInterface {
     private String name;
     private String access;
     private boolean statical = false;
@@ -63,13 +63,17 @@ public class ClassMethodCombiner implements CombinerInterface, AddImportInterfac
         this.body = body;
     }
 
-    public void setBody(String ...body) {
+    public ClassMethodCombiner setBody(String ...body) {
         setBody(new ArrayList<>(Arrays.asList(body)));
+
+        return this;
     }
 
-    public void setBody(ArrayList<String> body) {
+    public ClassMethodCombiner setBody(ArrayList<String> body) {
         this.body = new ArrayList<>();
         body.forEach(this::addBody);
+
+        return this;
     }
 
     public void addBody(String line) {
@@ -109,7 +113,8 @@ public class ClassMethodCombiner implements CombinerInterface, AddImportInterfac
 
         parameters.forEach(parameter -> parameterArray.add(parameter.toString()));
         content.append(String.join(", ", parameterArray));
-        content.append(") {");
+        content.append(")\n");
+        content.append(intend).append("{\n");
         if (body != null && body.size() > 0) {
             body.forEach(line -> {
                 if (line != null) {
@@ -126,13 +131,18 @@ public class ClassMethodCombiner implements CombinerInterface, AddImportInterfac
         return classCombiner;
     }
 
-
-    public void addComment(String comment) {
-        this.comments.add(comment);
+    @Override
+    public String addUse(String use) {
+        return this.classCombiner.addUse(use);
     }
 
-    @Override
-    public String addImport(String use) {
-        return this.classCombiner.addImport(use);
+    public void addComment(String comment) {
+        if (comment != null) {
+            this.comments.addAll(Arrays.asList(comment.split("\n")));
+        }
+    }
+
+    public static ClassMethodCombiner build(ClassCombiner classCombiner, String name, String access) {
+        return new ClassMethodCombiner(classCombiner, name, access);
     }
 }

@@ -10,13 +10,9 @@ buildscript {
     }
 }
 
-
 plugins {
     id 'java'
 }
-
-group 'com.kamicloud.liberator-parents'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -26,14 +22,10 @@ apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: "org.springframework.boot"
 
-bootJar {
-    classifier = 'boot'
-    mainClass = 'com.kamicloud.liberator.imba.Main'
-}
-
 dependencies {
     implementation project(':liberator-core')
-    implementation project(':liberator-generators');
+    implementation project(':liberator-generators')
+    implementation project(':liberator-laravel')
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
     implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
