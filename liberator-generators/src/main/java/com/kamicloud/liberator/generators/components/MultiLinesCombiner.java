@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class MultiLinesCombiner extends Combiner implements CombinerInterface {
-    private LinkedList<String> blocks;
+    private final LinkedList<String> blocks;
 
     public MultiLinesCombiner(String ...blocks) {
         this.blocks = new LinkedList<>(Arrays.asList(blocks));

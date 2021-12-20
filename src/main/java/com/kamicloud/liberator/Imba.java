@@ -1,7 +1,6 @@
-package com.kamicloud.liberator.imba;
+package com.kamicloud.liberator;
 
-import com.kamicloud.liberator.LiberatorManager;
-import com.kamicloud.liberator.imba.config.ApplicationProperties;
+import com.kamicloud.liberator.config.ApplicationProperties;
 import com.kamicloud.liberator.config.DefaultProfileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

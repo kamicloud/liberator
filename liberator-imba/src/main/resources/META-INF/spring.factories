@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.kamicloud.liberator.imba.config.ApplicationProperties,\
-  com.kamicloud.liberator.generators.config.GeneratorProperties

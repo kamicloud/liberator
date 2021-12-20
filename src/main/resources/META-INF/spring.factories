@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.kamicloud.liberator.config.ApplicationProperties,\
+  com.kamicloud.liberator.config.LiberatorProperties,\
+  com.kamicloud.liberator.generators.config.GeneratorProperties,\
+  com.kamicloud.liberator.laravel.config.LaravelProperties

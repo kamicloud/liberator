@@ -1,3 +1,13 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.5.4'
+    }
+}
 
 plugins {
     id 'java'
@@ -10,10 +20,12 @@ repositories {
     mavenCentral()
 }
 
+apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
 
 application {
-    mainClass = 'com.kamicloud.liberator.imba.Imba'
+    mainClass = 'com.kamicloud.liberator.Imba'
     group = 'com.kamicloud.liberator'
 }
 
@@ -23,7 +35,20 @@ java {
 }
 
 dependencies {
-    implementation project(':liberator-imba')
+    implementation project(':liberator-core')
+    implementation project(':liberator-generators')
+    implementation project(':liberator-laravel')
+
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-logging:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-starter-aop:2.5.4'
+    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
 
 test {

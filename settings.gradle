@@ -1,8 +1,6 @@
-rootProject.name = 'liberator-parent'
+rootProject.name = 'liberator'
 include 'liberator-core'
-include 'liberator-imba'
 include 'liberator-generators'
 include 'liberator-definitions'
 include 'liberator-templates'
 include 'liberator-laravel'
-
