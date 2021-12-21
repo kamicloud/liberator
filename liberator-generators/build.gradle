@@ -11,10 +11,6 @@ dependencies {
     implementation project(':liberator-definitions')
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-logging:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-aop:2.5.4'
     implementation 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
 
@@ -23,9 +19,6 @@ dependencies {
     implementation 'org.yaml:snakeyaml:1.29'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
-
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
 
 test {

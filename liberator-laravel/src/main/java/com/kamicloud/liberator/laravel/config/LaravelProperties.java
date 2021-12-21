@@ -10,13 +10,10 @@ import java.util.Objects;
 @Component
 public class LaravelProperties {
     private String forceSuffix;
-    private Postman postman = new Postman();
-    private Testcases testcases;
     private Laravel laravel;
     private LaravelDoc laravelDoc;
     private LaravelAutoTest laravelAutoTest;
     private NodejsClient nodejsClient;
-    private JavaClient javaClient;
 
     public String getForceSuffix() {
         return forceSuffix;
@@ -24,22 +21,6 @@ public class LaravelProperties {
 
     public void setForceSuffix(String forceSuffix) {
         this.forceSuffix = forceSuffix;
-    }
-
-    public Postman getPostman() {
-        return postman;
-    }
-
-    public void setPostman(Postman postman) {
-        this.postman = postman;
-    }
-
-    public Testcases getTestcases() {
-        return testcases;
-    }
-
-    public void setTestcases(Testcases testcases) {
-        this.testcases = testcases;
     }
 
     public Laravel getLaravel() {
@@ -58,14 +39,6 @@ public class LaravelProperties {
         this.laravelDoc = laravelDoc;
     }
 
-    public JavaClient getJavaClient() {
-        return javaClient;
-    }
-
-    public void setJavaClient(JavaClient javaClient) {
-        this.javaClient = javaClient;
-    }
-
     public NodejsClient getNodejsClient() {
         return nodejsClient;
     }
@@ -82,29 +55,6 @@ public class LaravelProperties {
         this.laravelAutoTest = laravelAutoTest;
     }
 
-    public static class Postman {
-        private String path;
-
-        public String getPath() {
-            return Objects.requireNonNull(path);
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-    }
-
-    public static class Testcases {
-        private String path;
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-    }
 
     public static class Laravel {
         private String path;
@@ -232,27 +182,6 @@ public class LaravelProperties {
 
         public void setOutput(String output) {
             this.output = output;
-        }
-    }
-
-    public static class JavaClient {
-        private String path;
-        private String classpath;
-
-        public String getPath() {
-            return path;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public String getClasspath() {
-            return classpath;
-        }
-
-        public void setClasspath(String classpath) {
-            this.classpath = classpath;
         }
     }
 }

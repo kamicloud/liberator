@@ -5,13 +5,17 @@
 # ===================================================================
 
 liberator:
+  parsers:
+    - build-parser
+    - doc-parser
+    - ast-parser
   generators:
     - laravel
     - laravel-doc
     - postman
     - testcases
     - openapi
-  template-path: ./liberator-templates/main/java
+  template-path: ./liberator-templates/src/main/java
 generator:
   process:
     laravel-auto-test:

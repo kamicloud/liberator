@@ -49,11 +49,11 @@ allprojects {
 }
 
 dependencies {
+    implementation project(':liberator-templates')
     implementation project(':liberator-core')
     implementation project(':liberator-generators')
     implementation project(':liberator-laravel')
 
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
     implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-logging:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.4'

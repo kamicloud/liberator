@@ -9,6 +9,7 @@ import java.util.Objects;
 @ConfigurationProperties(prefix = "liberator", ignoreUnknownFields = false)
 @Component
 public class LiberatorProperties {
+    private LinkedList<String> parsers = new LinkedList<String>();
     private LinkedList<String> generators;
 
     private String templatePath;
@@ -27,5 +28,13 @@ public class LiberatorProperties {
 
     public void setTemplatePath(String templatePath) {
         this.templatePath = templatePath;
+    }
+
+    public LinkedList<String> getParsers() {
+        return parsers;
+    }
+
+    public void setParsers(LinkedList<String> parsers) {
+        this.parsers = parsers;
     }
 }

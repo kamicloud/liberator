@@ -9,7 +9,6 @@ import definitions.annotations.FixedEnumValueInterface;
 import definitions.annotations.Request;
 import definitions.types.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import templates.TemplateList;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -50,12 +49,44 @@ public class BuildParser extends Parser {
     }
 
     public void parse() {
-        Arrays.asList(TemplateList.templates).forEach(this::parseTemplate);
+        try {
+            Class<?> templateListClass = Class.forName("templates.TemplateList");
+            Field[] fields = templateListClass.getDeclaredFields();
 
-        parseErrors(TemplateList.errorsTemplate);
+            Class<?> currentTemplate = null;
+            for (Field field : fields) {
+                if (field.getName().equals("currentTemplate")) {
+                    field.setAccessible(true);
+                    currentTemplate = (Class<?>)field.get(templateListClass);
+                }
+            }
+
+            for (Field field : fields) {
+                if (field.getName().equals("templates")) {
+                    field.setAccessible(true);
+                    Class<?>[] templateList = (Class<?>[])field.get(templateListClass);
+                    Class<?> finalCurrentTemplate = currentTemplate;
+                    Arrays.asList(templateList).forEach(template -> {
+                        TemplateStub templateStub = this.parseTemplate(template);
+
+                        if (template == finalCurrentTemplate) {
+                            outputStub.setCurrentTemplate(templateStub);
+                        }
+                    });
+                }
+
+                if (field.getName().equals("errorsTemplate")) {
+                    field.setAccessible(true);
+                    Class<? extends Enum<?>> errorsTemplate = (Class<? extends Enum<?>>)field.get(templateListClass);
+                    parseErrors(errorsTemplate);
+                }
+            }
+        } catch (ClassNotFoundException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void parseTemplate(Class<?> template) {
+    private TemplateStub parseTemplate(Class<?> template) {
         String version = template.getSimpleName();
         version = version.replace("Template", "");
         TemplateStub templateStub = new TemplateStub(
@@ -64,12 +95,10 @@ public class BuildParser extends Parser {
         );
 
         Arrays.asList(template.getDeclaredClasses()).forEach(part -> {
-            if (part.getSimpleName().equals("Enums")) {
-                parseEnums(part.getDeclaredClasses(), templateStub);
-            } else if (part.getSimpleName().equals("Controllers")) {
-                parseControllers(part.getDeclaredClasses(), templateStub);
-            } else if (part.getSimpleName().equals("Models")) {
-                parseModels(part.getDeclaredClasses(), templateStub);
+            switch (part.getSimpleName()) {
+                case "Enums" -> parseEnums(part.getDeclaredClasses(), templateStub);
+                case "Controllers" -> parseControllers(part.getDeclaredClasses(), templateStub);
+                case "Models" -> parseModels(part.getDeclaredClasses(), templateStub);
             }
         });
 
@@ -77,15 +106,13 @@ public class BuildParser extends Parser {
 
         outputStub.addTemplate(templateStub);
 
-        if (template == TemplateList.currentTemplate) {
-            outputStub.setCurrentTemplate(templateStub);
-        }
+        return templateStub;
     }
 
-    private void parseErrors(Class<? extends Enum> errorsTemplate) {
+    private void parseErrors(Class<? extends Enum<?>> errorsTemplate) {
         Arrays.asList(errorsTemplate.getFields()).forEach(error -> {
             try {
-                Enum<?> value = Enum.valueOf(errorsTemplate, error.getName());
+                Enum<?> value = Enum.valueOf((Class<? extends Enum>)errorsTemplate, error.getName());
                 if (ErrorInterface.class.isAssignableFrom(errorsTemplate)) {
                     Method getValue = errorsTemplate.getMethod("getValue");
                     String fillValue = getValue.invoke(value).toString();
@@ -156,15 +183,15 @@ public class BuildParser extends Parser {
                 parseComment(enumTemplate.getCanonicalName(), enumStub);
                 parseAnnotations(enumTemplate.getAnnotations(), enumStub);
 
-                Class clazz = Class.forName(enumTemplate.getName());
+                Class<Enum> clazz = (Class<Enum>)Class.forName(enumTemplate.getName());
 
                 Arrays.asList(enumTemplate.getFields()).forEach(entryTemplate -> {
                     try {
                         String key = entryTemplate.getName();
                         Enum<?> value = Enum.valueOf(clazz, entryTemplate.getName());
-                        Integer ordinal = value.ordinal();
+                        int ordinal = value.ordinal();
                         EnumStub.EnumStubItemType type = EnumStub.EnumStubItemType.INTEGER;
-                        String fillValue = ordinal.toString();
+                        String fillValue = Integer.toString(ordinal);
                         if (FixedEnumValueInterface.class.isAssignableFrom(enumTemplate)) {
                             Method getValue = enumTemplate.getMethod("getValue");
                             getValue.setAccessible(true);
@@ -309,9 +336,5 @@ public class BuildParser extends Parser {
         String canonicalName = field.getDeclaringClass().getCanonicalName();
         String name = field.getName();
         return canonicalName + "." + name;
-    }
-
-    public OutputStub getStub() {
-        return this.outputStub;
     }
 }

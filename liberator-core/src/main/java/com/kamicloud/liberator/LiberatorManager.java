@@ -1,6 +1,7 @@
 package com.kamicloud.liberator;
 
 import com.kamicloud.liberator.config.LiberatorProperties;
+import com.kamicloud.liberator.parsers.ASTParser;
 import com.kamicloud.liberator.parsers.DocParser;
 import com.kamicloud.liberator.parsers.BuildParser;
 import com.kamicloud.liberator.stubs.core.OutputStub;
@@ -24,9 +25,13 @@ public class LiberatorManager {
     @Autowired
     private DocParser docParser;
 
+    @Autowired
+    private ASTParser astParser;
+
     public void run() {
         buildParser.parse();
         docParser.parse();
+        astParser.parse();
 
         output.postParse();
 

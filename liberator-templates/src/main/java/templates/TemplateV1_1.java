@@ -1,7 +1,7 @@
 package templates;
 
 /**
- * 接口配置
+ * API
  */
 public class TemplateV1_1 {
 }
