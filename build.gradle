@@ -16,22 +16,36 @@ plugins {
     id 'org.springframework.boot' version '2.5.4'
 }
 
-repositories {
-    mavenCentral()
-}
-
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 
 application {
     mainClass = 'com.kamicloud.liberator.Imba'
-    group = 'com.kamicloud.liberator'
 }
 
-java {
-    withJavadocJar()
-    withSourcesJar()
+allprojects {
+    apply plugin: 'maven-publish'
+    apply plugin: 'java'
+
+    group 'com.kamicloud'
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                from components.java
+            }
+        }
+    }
 }
 
 dependencies {
