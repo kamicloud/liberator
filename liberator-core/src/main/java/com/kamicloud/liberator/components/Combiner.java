@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.generators.components;
+package com.kamicloud.liberator.components;
 
 import com.kamicloud.liberator.interfaces.CombinerInterface;
 

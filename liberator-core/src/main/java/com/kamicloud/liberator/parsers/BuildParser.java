@@ -138,7 +138,8 @@ public class BuildParser extends Parser {
         Arrays.asList(controllers).forEach(controller -> {
             ControllerStub controllerStub = new ControllerStub(
                 controller.getSimpleName(),
-                controller.getCanonicalName()
+                controller.getCanonicalName(),
+                templateStub
             );
             templateStub.addController(controllerStub);
 
@@ -148,7 +149,8 @@ public class BuildParser extends Parser {
             Arrays.asList(controller.getDeclaredClasses()).forEach(action -> {
                 ActionStub actionStub = new ActionStub(
                     CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, action.getSimpleName()),
-                    action.getCanonicalName()
+                    action.getCanonicalName(),
+                    controllerStub
                 );
                 controllerStub.addAction(actionStub);
                 // 注解
@@ -158,7 +160,7 @@ public class BuildParser extends Parser {
 
                 // 遍历每一个参数，注解+类型+变量
                 Arrays.asList(action.getDeclaredFields()).forEach(parameter -> {
-                    ParameterStub parameterStub = parseParameter(parameter);
+                    ParameterStub parameterStub = parseParameter(actionStub, parameter);
                     if (parameterStub != null) {
                         if (parameterStub.hasAnnotation(Request.class)) {
                             actionStub.addRequest(parameterStub);
@@ -215,12 +217,12 @@ public class BuildParser extends Parser {
         });
     }
 
-    private void parseAnnotations(Annotation[] annotations, AnnotationsInterface baseStub) {
+    private void parseAnnotations(Annotation[] annotations, Stub baseStub) {
         Arrays.asList(annotations).forEach(annotation -> {
             Class<?> annotationClass = annotation.annotationType();
             String annotationName = annotationClass.getSimpleName();
 
-            AnnotationStub annotationStub = new AnnotationStub(annotationName);
+            AnnotationStub annotationStub = new AnnotationStub(annotationName, baseStub);
 
             baseStub.addAnnotation(annotation, annotationStub);
 
@@ -261,10 +263,10 @@ public class BuildParser extends Parser {
             parseAnnotations(model.getAnnotations(), modelStub);
 
             parseComment(model.getCanonicalName(), modelStub);
-            modelStub.setParentClasspath(model.getSuperclass().getCanonicalName());
+            modelStub.setExtendClasspath(model.getSuperclass().getCanonicalName());
             // 遍历每一个参数，注解+类型+变量
             Arrays.asList(model.getDeclaredFields()).forEach(parameter -> {
-                ParameterStub parameterStub = parseParameter(parameter);
+                ParameterStub parameterStub = parseParameter(modelStub, parameter);
                 if (parameterStub != null) {
                     modelStub.addParameter(parameterStub);
                 }
@@ -273,7 +275,7 @@ public class BuildParser extends Parser {
         });
     }
 
-    private ParameterStub parseParameter(Field parameter) {
+    private ParameterStub parseParameter(Stub parent, Field parameter) {
         if (parameter.getName().startsWith("this")) {
             return null;
         }
@@ -290,10 +292,10 @@ public class BuildParser extends Parser {
             String typeName = parameterType.getTypeName();
             String typeSimpleName = parameterType.getSimpleName();
 
-
             ParameterStub parameterStub = new ParameterStub(
                 parameter.getName(),
                 fieldBuilder(parameter),
+                parent,
                 typeSimpleName,
                 parameterType.getCanonicalName()
             );
@@ -327,8 +329,9 @@ public class BuildParser extends Parser {
         }
     }
 
-    private void parseComment(String name, BaseWithAnnotationStub commentStub) {
+    private void parseComment(String name, Stub commentStub) {
         commentStub.setClasspath(name);
+
         outputStub.classHashMap.put(commentStub.getClasspath(), commentStub);
     }
 

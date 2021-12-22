@@ -3,21 +3,26 @@ package com.kamicloud.liberator.stubs.core;
 import definitions.types.Type;
 import definitions.official.TypeSpec;
 
-public class ParameterStub extends BaseWithAnnotationStub {
-    private String typeSimpleName;
+public class ParameterStub extends Stub {
+    protected String typeSimpleName;
 
-    private boolean array = false;
+    protected boolean array = false;
 
     protected int arrayDepth = 0;
 
     protected Type type;
 
-    protected TypeStub typeStub;
-
     protected String typeClasspath;
 
-    public ParameterStub(String name, String classpath, String type, String typeClasspath) {
-        super(name, classpath);
+    public ParameterStub(
+        String name,
+        String classpath,
+        Stub parent,
+        String type,
+        String typeClasspath
+    ) {
+        super(name, classpath, parent);
+
         this.typeSimpleName = type;
         this.typeClasspath = typeClasspath;
     }
@@ -28,14 +33,6 @@ public class ParameterStub extends BaseWithAnnotationStub {
 
     public boolean isArray() {
         return arrayDepth > 0;
-    }
-
-    public TypeStub getTypeStub() {
-        return typeStub;
-    }
-
-    public void setTypeStub(TypeStub typeStub) {
-        this.typeStub = typeStub;
     }
 
     public boolean isModel() {

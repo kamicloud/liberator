@@ -1,13 +1,13 @@
 package com.kamicloud.liberator.laravel.components;
 
 import com.kamicloud.liberator.interfaces.CombinerInterface;
-import com.kamicloud.liberator.generators.components.FileCombiner;
-import com.kamicloud.liberator.generators.components.Combiner;
-import com.kamicloud.liberator.generators.components.FileWriter;
+import com.kamicloud.liberator.components.FileCombiner;
+import com.kamicloud.liberator.components.Combiner;
+import com.kamicloud.liberator.interfaces.FileCombinerInterface;
 
 import java.io.IOException;
 
-public class PHPFileCombiner extends Combiner implements FileWriter, CombinerInterface {
+public class PHPFileCombiner extends Combiner implements FileCombinerInterface, CombinerInterface {
     protected String fileName;
 
     @Override

@@ -6,7 +6,7 @@ import com.kamicloud.liberator.stubs.core.OutputStub;
 import com.kamicloud.liberator.generators.stubs.testcase.TestCaseStub;
 import com.kamicloud.liberator.utils.FileUtil;
 import com.kamicloud.liberator.utils.UrlUtil;
-import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.components.FileCombiner;
 import com.kamicloud.liberator.laravel.components.ClassCombiner;
 import com.kamicloud.liberator.laravel.components.ClassMethodCombiner;
 import okhttp3.*;

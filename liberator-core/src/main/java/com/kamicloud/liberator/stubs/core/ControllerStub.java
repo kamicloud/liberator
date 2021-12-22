@@ -2,11 +2,11 @@ package com.kamicloud.liberator.stubs.core;
 
 import java.util.LinkedList;
 
-public class ControllerStub extends BaseWithAnnotationStub {
-    private LinkedList<ActionStub> actions = new LinkedList<>();
+public class ControllerStub extends Stub {
+    protected final LinkedList<ActionStub> actions = new LinkedList<>();
 
-    public ControllerStub(String name, String classpath) {
-        super(name, classpath);
+    public ControllerStub(String name, String classpath, TemplateStub parent) {
+        super(name, classpath, parent);
     }
 
     public LinkedList<ActionStub> getActions() {
@@ -14,7 +14,6 @@ public class ControllerStub extends BaseWithAnnotationStub {
     }
 
     public void addAction(ActionStub actionStub) {
-        actionStub.setParentNode(this);
         actions.add(actionStub);
     }
 }

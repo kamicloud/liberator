@@ -1,4 +1,6 @@
-package com.kamicloud.liberator.stubs.core;
+package com.kamicloud.liberator.stubs.interfaces;
+
+import com.kamicloud.liberator.stubs.core.AnnotationStub;
 
 import java.lang.annotation.Annotation;
 

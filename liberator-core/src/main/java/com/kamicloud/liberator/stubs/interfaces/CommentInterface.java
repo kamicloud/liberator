@@ -1,4 +1,4 @@
-package com.kamicloud.liberator.stubs.core;
+package com.kamicloud.liberator.stubs.interfaces;
 
 public interface CommentInterface {
     String getClasspath();

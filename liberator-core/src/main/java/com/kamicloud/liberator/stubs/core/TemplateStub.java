@@ -3,16 +3,16 @@ package com.kamicloud.liberator.stubs.core;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class TemplateStub extends BaseWithAnnotationStub {
-    private ArrayList<String> constants = new ArrayList<>();
-    private ArrayList<EnumStub> enums = new ArrayList<>();
-    private LinkedList<ModelStub> models = new LinkedList<>();
-    private ArrayList<ControllerStub> controllers = new ArrayList<>();
+public class TemplateStub extends Stub {
+    protected final ArrayList<String> constants = new ArrayList<>();
+    protected final ArrayList<EnumStub> enums = new ArrayList<>();
+    protected final LinkedList<ModelStub> models = new LinkedList<>();
+    protected final ArrayList<ControllerStub> controllers = new ArrayList<>();
 
     private boolean current = false;
 
     public TemplateStub(String name, String classpath) {
-        super(name, classpath);
+        super(name, classpath, null);
     }
 
     public ArrayList<String> getConstants() {
@@ -32,7 +32,6 @@ public class TemplateStub extends BaseWithAnnotationStub {
     }
 
     public void addController(ControllerStub controllerStub) {
-        controllerStub.setParentNode(this);
         controllers.add(controllerStub);
     }
 

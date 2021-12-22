@@ -1,7 +1,8 @@
 package com.kamicloud.liberator.stubs.core;
 
 import com.google.common.base.CaseFormat;
-import com.kamicloud.liberator.config.DefaultProfileUtil;
+import com.kamicloud.liberator.stubs.interfaces.AnnotationsInterface;
+import com.kamicloud.liberator.stubs.interfaces.CommentInterface;
 import com.kamicloud.liberator.utils.CommentUtil;
 import com.kamicloud.liberator.utils.StringUtil;
 import definitions.annotations.Extendable;
@@ -10,41 +11,36 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Objects;
 
 @SuppressWarnings("unused")
-public class BaseWithAnnotationStub implements AnnotationsInterface, CommentInterface {
-    private String classpath;
+public abstract class Stub implements AnnotationsInterface, CommentInterface {
+    protected String classpath;
 
-    private String name;
-    private String upperCamelName;
-    private String lowerCamelName;
-    private String lowerUnderScoreName;
-    private String upperUnderScoreName;
+    protected final Stub parent;
+    protected final HashMap<String, AnnotationStub> annotations = new HashMap<>();
+    protected final ArrayList<String> comments = new ArrayList<>();
+    protected String comment;
 
-    private BaseWithAnnotationStub parentNode;
-    private HashMap<String, AnnotationStub> annotations = new HashMap<>();
-    private ArrayList<String> comments = new ArrayList<>();
-    private String comment;
+    protected String name;
+    protected String upperCamelName;
+    protected String lowerCamelName;
+    protected String lowerUnderScoreName;
+    protected String upperUnderScoreName;
 
-    private String dtoFolder = DefaultProfileUtil.getEnv().getProperty("generator.generators.laravel.dto-folder", "DTOs");
-    private String dtoSuffix = DefaultProfileUtil.getEnv().getProperty("generator.generators.laravel.dto-suffix", "DTO");
-
-    /**
-     * @param name 类 / 变量名称 都将转成Upper camel
-     */
-    BaseWithAnnotationStub(
+    public Stub(
         String name,
-        String classpath
+        String classpath,
+        Stub parent
     ) {
         this.name = name;
-        this.classpath = classpath;
-
         this.upperCamelName = name;
         this.lowerCamelName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, name);
         this.lowerUnderScoreName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, name);
         this.upperUnderScoreName = CaseFormat.UPPER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, name);
 
+        this.classpath = classpath;
+
+        this.parent = parent;
     }
 
     public String getName() {
@@ -118,7 +114,7 @@ public class BaseWithAnnotationStub implements AnnotationsInterface, CommentInte
     }
 
     /**
-     * 获取 注释体
+     * Get comment body
      *
      * @return String
      */
@@ -127,7 +123,7 @@ public class BaseWithAnnotationStub implements AnnotationsInterface, CommentInte
     }
 
     /**
-     * 注释体 lf to br
+     * Convert lf to br
      *
      * @return String
      */
@@ -135,31 +131,23 @@ public class BaseWithAnnotationStub implements AnnotationsInterface, CommentInte
         return StringUtil.transformLfToBr(getCommentBody());
     }
 
-    public void setParentNode(BaseWithAnnotationStub parentNode) {
-        this.parentNode = parentNode;
-    }
-
     public Boolean hasAnnotation(Class<?> type) {
         boolean hasAnnotation = annotations.containsKey(type.getCanonicalName());
         if (type.getAnnotation(Extendable.class) != null) {
-            hasAnnotation = hasAnnotation || (parentNode != null && parentNode.hasAnnotation(type));
+            hasAnnotation = hasAnnotation || (parent != null && parent.hasAnnotation(type));
         }
         return hasAnnotation;
     }
 
     public AnnotationStub getAnnotation(Class<?> type) {
         AnnotationStub annotationStub = annotations.get(type.getCanonicalName());
-        if (type.getAnnotation(Extendable.class) != null && annotationStub == null && parentNode != null) {
-            annotationStub = parentNode.getAnnotation(type);
+        if (type.getAnnotation(Extendable.class) != null && annotationStub == null && parent != null) {
+            annotationStub = parent.getAnnotation(type);
         }
         return annotationStub;
     }
 
-    public String getDtoFolder() {
-        return dtoFolder;
-    }
-
-    public String getDtoSuffix() {
-        return dtoSuffix;
+    public Stub getParent() {
+        return parent;
     }
 }

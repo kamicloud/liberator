@@ -1,7 +1,7 @@
 package com.kamicloud.liberator.laravel.components;
 
 import com.kamicloud.liberator.interfaces.CombinerInterface;
-import com.kamicloud.liberator.generators.components.FileWriter;
+import com.kamicloud.liberator.interfaces.FileCombinerInterface;
 import com.kamicloud.liberator.laravel.interfaces.PHPNamespacePathTransformerInterface;
 
 import java.io.*;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class ClassCombiner implements FileWriter, CombinerInterface, AddUseInterface {
+public class ClassCombiner implements FileCombinerInterface, CombinerInterface, AddUseInterface {
     private static PHPNamespacePathTransformerInterface namespacePathTransformer;
     protected String fileName;
     private String namespace;

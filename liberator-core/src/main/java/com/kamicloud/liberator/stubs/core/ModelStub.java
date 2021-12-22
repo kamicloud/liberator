@@ -5,23 +5,19 @@ import definitions.annotations.RESTFul;
 
 import java.util.LinkedList;
 
-public class ModelStub extends BaseWithAnnotationStub implements ResourceInterface {
-    private LinkedList<ParameterStub> parameters = new LinkedList<>();
-    private String parentClasspath;
-    private ModelStub parent;
+public class ModelStub extends Stub implements ResourceInterface {
+    protected final LinkedList<ParameterStub> parameters = new LinkedList<>();
+    protected String extendClasspath;
+    protected ModelStub extend;
 
-    private TemplateStub template;
-
-    public ModelStub(String name, String classpath, TemplateStub template) {
-        super(name, classpath);
-
-        this.template = template;
+    public ModelStub(String name, String classpath, TemplateStub parent) {
+        super(name, classpath, parent);
     }
 
     public LinkedList<ParameterStub> getParameters() {
         LinkedList<ParameterStub> parameters = new LinkedList<>();
-        if (parent != null) {
-            parameters.addAll(parent.getParameters());
+        if (extend != null) {
+            parameters.addAll(extend.getParameters());
         }
 
         this.parameters.forEach(parameterStub -> {
@@ -29,20 +25,19 @@ public class ModelStub extends BaseWithAnnotationStub implements ResourceInterfa
             parameters.add(parameterStub);
         });
 
-
         return parameters;
     }
 
-    public void setParentClasspath(String parentClasspath) {
-        this.parentClasspath = parentClasspath;
+    public void setExtendClasspath(String extendClasspath) {
+        this.extendClasspath = extendClasspath;
     }
 
-    public String getParentClasspath() {
-        return parentClasspath;
+    public String getExtendClasspath() {
+        return extendClasspath;
     }
 
-    public void setParent(ModelStub parent) {
-        this.parent = parent;
+    public void setExtend(ModelStub extend) {
+        this.extend = extend;
     }
 
     public void addParameter(ParameterStub parameterStub) {
@@ -57,9 +52,5 @@ public class ModelStub extends BaseWithAnnotationStub implements ResourceInterfa
     public LinkedList<ParameterStub> clone() {
 
         return new LinkedList<>(this.parameters);
-    }
-
-    public TemplateStub getTemplate() {
-        return template;
     }
 }

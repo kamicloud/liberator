@@ -2,15 +2,16 @@ package com.kamicloud.liberator.stubs.core;
 
 import java.util.LinkedList;
 
-public class ActionStub extends BaseWithAnnotationStub {
-    private LinkedList<ParameterStub> requests = new LinkedList<>();
-    private LinkedList<ParameterStub> responses = new LinkedList<>();
+public class ActionStub extends Stub {
+    protected final LinkedList<ParameterStub> requests = new LinkedList<>();
+    protected final LinkedList<ParameterStub> responses = new LinkedList<>();
 
-    private String uri;
-    private String fullUri;
+    protected final ControllerStub controller;
 
-    public ActionStub(String name, String classpath) {
-        super(name, classpath);
+    public ActionStub(String name, String classpath, ControllerStub parent) {
+        super(name, classpath, parent);
+
+        this.controller = parent;
     }
 
     public LinkedList<ParameterStub> getRequests() {
@@ -29,19 +30,7 @@ public class ActionStub extends BaseWithAnnotationStub {
         responses.add(parameterStub);
     }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public String getFullUri() {
-        return fullUri;
-    }
-
-    public void setFullUri(String fullUri) {
-        this.fullUri = fullUri;
+    public ControllerStub getController() {
+        return controller;
     }
 }

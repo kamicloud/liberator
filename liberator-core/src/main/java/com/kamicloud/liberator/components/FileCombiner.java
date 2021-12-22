@@ -1,7 +1,8 @@
-package com.kamicloud.liberator.generators.components;
+package com.kamicloud.liberator.components;
 
 import com.kamicloud.liberator.config.DefaultProfileUtil;
 import com.kamicloud.liberator.interfaces.CombinerInterface;
+import com.kamicloud.liberator.interfaces.FileCombinerInterface;
 import org.springframework.core.env.Environment;
 
 import java.io.File;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
-public class FileCombiner extends Combiner implements FileWriter, CombinerInterface {
+public class FileCombiner extends Combiner implements FileCombinerInterface, CombinerInterface {
     protected String fileName;
 
     public void setFileName(String fileName) {

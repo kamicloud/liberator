@@ -10,8 +10,6 @@ liberator:
     - doc-parser
     - ast-parser
   generators:
-    - laravel
-    - laravel-doc
     - postman
     - testcases
     - openapi

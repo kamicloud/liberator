@@ -1,12 +1,13 @@
 package com.kamicloud.liberator.stubs.core;
 
-public class ErrorStub extends BaseWithAnnotationStub {
+public class ErrorStub extends Stub {
 
     private String code;
     private String message;
 
     public ErrorStub(String name, String classpath, String code, String message) {
-        super(name, classpath);
+        super(name, classpath, null);
+
         this.code = code;
         this.message = message;
     }

@@ -1,11 +1,13 @@
 package com.kamicloud.liberator.laravel;
 
 import com.google.common.base.CaseFormat;
+import com.kamicloud.liberator.config.DefaultProfileUtil;
 import com.kamicloud.liberator.laravel.interfaces.PHPNamespacePathTransformerInterface;
 import com.kamicloud.liberator.stubs.core.*;
 import com.kamicloud.liberator.utils.FileUtil;
-import com.kamicloud.liberator.generators.components.FileCombiner;
+import com.kamicloud.liberator.components.FileCombiner;
 import com.kamicloud.liberator.laravel.components.*;
+import com.kamicloud.liberator.utils.UrlUtil;
 import definitions.annotations.*;
 import definitions.annotations.Optional;
 import definitions.official.TypeSpec;
@@ -55,6 +57,9 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
     public String getName() {
         return "laravel";
     }
+
+    private String dtoFolder = DefaultProfileUtil.getEnv().getProperty("generator.generators.laravel.dto-folder", "DTOs");
+    private String dtoSuffix = DefaultProfileUtil.getEnv().getProperty("generator.generators.laravel.dto-suffix", "DTO");
 
     void setup() {
         boFolder = env.getProperty("liberator-laravel.laravel.bo-folder", "BOs");
@@ -146,7 +151,7 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
         try {
             String modelName = modelStub.getName();
             ClassCombiner modelClassCombiner = new ClassCombiner(
-                "App\\Generated\\" + version + "\\" + modelStub.getDtoFolder() + "\\" + modelName + modelStub.getDtoSuffix(),
+                "App\\Generated\\" + version + "\\" + dtoFolder + "\\" + modelName + dtoSuffix,
                 baseDTONamespace
             );
 
@@ -404,12 +409,22 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
                     middlewarePart = "->middleware(['" + String.join("', '", x.getValues()) + "'])";
                 }
                 fileCombiner.addLine(
-                    "Route::match(" + method + ", '" + action.getUri() + "', '" + version + "\\" + controller.getName() + "Controller@" + actionName + "')" + middlewarePart + ";"
+                    "Route::match(" + method + ", '" + getActionUri(version, controller, action) + "', '" + version + "\\" + controller.getName() + "Controller@" + actionName + "')" + middlewarePart + ";"
                 );
             }));
         });
 
         fileCombiner.toFile();
+    }
+
+    public String getActionUri(String version, ControllerStub controllerStub, ActionStub actionStub) {
+        String actionName = actionStub.getName();
+
+        String uri = "/" + UrlUtil.transformVersion(version) +
+                "/" + UrlUtil.transformController(controllerStub.getName()) +
+                "/" + UrlUtil.transformAction(actionName);
+
+        return uri;
     }
 
     @Override
@@ -459,7 +474,7 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
         String returnType;
 
         if (type.getSpec() == TypeSpec.MODEL) {
-            returnType = parameterStub.getTypeSimpleName() + parameterStub.getDtoSuffix();
+            returnType = parameterStub.getTypeSimpleName() + dtoSuffix;
         } else if (type.getSpec() == TypeSpec.ENUM || type.getSpec() == TypeSpec.DATE) {
             returnType = "mixed";
         } else {
@@ -533,8 +548,8 @@ public class LaravelGenerator extends BaseGenerator implements PHPNamespacePathT
                 types.add("Constants::ARRAY");
             }
             if (isModel) {
-                classCombiner.addUse("App\\Generated\\" + version + "\\" + parameterStub.getDtoFolder() + "\\" + typeName + parameterStub.getDtoSuffix());
-                rule = typeName + parameterStub.getDtoSuffix() + "::class";
+                classCombiner.addUse("App\\Generated\\" + version + "\\" + dtoFolder + "\\" + typeName + dtoSuffix);
+                rule = typeName + dtoSuffix + "::class";
             } else if (isEnum) {
                 classCombiner.addUse("App\\Generated\\" + version + "\\Enums\\" + typeName);
                 rule = typeName + "::class";

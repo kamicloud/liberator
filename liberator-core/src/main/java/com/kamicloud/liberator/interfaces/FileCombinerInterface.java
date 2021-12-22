@@ -1,8 +1,8 @@
-package com.kamicloud.liberator.generators.components;
+package com.kamicloud.liberator.interfaces;
 
 import java.io.IOException;
 
-public interface FileWriter {
+public interface FileCombinerInterface {
 
     void setFileName(String fileName);
 

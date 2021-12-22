@@ -1,8 +1,8 @@
 package com.kamicloud.liberator.laravel;
 
 import com.kamicloud.liberator.stubs.core.TemplateStub;
-import com.kamicloud.liberator.generators.components.FileCombiner;
-import com.kamicloud.liberator.generators.components.MultiLinesCombiner;
+import com.kamicloud.liberator.components.FileCombiner;
+import com.kamicloud.liberator.components.MultiLinesCombiner;
 import org.thymeleaf.context.Context;
 
 import java.io.File;

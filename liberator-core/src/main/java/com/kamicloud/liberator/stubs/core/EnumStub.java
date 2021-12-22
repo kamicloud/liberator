@@ -3,11 +3,11 @@ package com.kamicloud.liberator.stubs.core;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class EnumStub extends BaseWithAnnotationStub {
-    private LinkedHashMap<String, EnumStubItem> items = new LinkedHashMap<>();
+public class EnumStub extends Stub {
+    protected final LinkedHashMap<String, EnumStubItem> items = new LinkedHashMap<>();
 
     public EnumStub(String name, String classpath) {
-        super(name, classpath);
+        super(name, classpath, null);
     }
 
     public void addItem(String key, String classpath, String value, EnumStubItemType type) {
@@ -22,10 +22,10 @@ public class EnumStub extends BaseWithAnnotationStub {
         return items;
     }
 
-    public static class EnumStubItem extends BaseWithAnnotationStub {
-        private EnumStubItemType type;
+    public static class EnumStubItem extends Stub {
+        protected final EnumStubItemType type;
         public EnumStubItem(String name, String classpath, EnumStubItemType type) {
-            super(name, classpath);
+            super(name, classpath, null);
             this.type = type;
         }
 
