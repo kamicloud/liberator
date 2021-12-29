@@ -28,7 +28,7 @@ allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'java'
 
-    group 'com.kamicloud'
+    group 'com.github.kamicloud.liberator'
 
     java {
         withJavadocJar()
