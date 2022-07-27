@@ -25,4 +25,9 @@ public class GeneratorConfiguration {
     public OpenAPIGenerator openAPIGenerator() {
         return new OpenAPIGenerator();
     }
+
+    @Bean
+    public StubGenerator stubGenerator() {
+        return new StubGenerator();
+    }
 }

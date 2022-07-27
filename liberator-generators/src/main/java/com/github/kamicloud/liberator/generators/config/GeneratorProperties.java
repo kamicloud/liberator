@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Objects;
 
 @ConfigurationProperties(prefix = "generator", ignoreUnknownFields = false)
@@ -15,6 +16,8 @@ public class GeneratorProperties {
     private String templatePath;
     private String testHost;
     private Generators generators = new Generators();
+
+    private LinkedList<Stub> stubs = new LinkedList<>();
 
     public Process getProcess() {
         return process;
@@ -137,5 +140,49 @@ public class GeneratorProperties {
                 this.path = path;
             }
         }
+    }
+
+    public LinkedList<Stub> getStubs() {
+        return this.stubs;
+    }
+
+    public void setStubs(LinkedList<Stub> stubs) {
+        this.stubs = stubs;
+    }
+
+    public static class Stub {
+        private StubName stub;
+        private String template;
+
+        public StubName getStub() {
+            return this.stub;
+        }
+
+        public String getTemplate() {
+            return this.template;
+        }
+
+        public void setStub(StubName stub) {
+            this.stub = stub;
+        }
+
+        public void setTemplate(String template) {
+            this.template = template;
+        }
+    }
+
+    public enum StubName {
+        OUTPUT,
+        ERROR,
+        CURRENT_TEMPLATE,
+        TEMPLATE,
+        CONSTANT,
+        ENUM,
+        MODEL,
+        CURRENT_TEMPLATE_CONSTANT,
+        CURRENT_TEMPLATE_ENUM,
+        CURRENT_TEMPLATE_MODEL,
+        CURRENT_TEMPLATE_CONTROLLER,
+        CURRENT_TEMPLATE_ACTION,
     }
 }

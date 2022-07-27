@@ -38,7 +38,15 @@ public class LiberatorManager {
         LinkedList<String> enabledGenerators = this.liberatorProperties.getGenerators();
 
         enabledGenerators.forEach(enabledGenerator -> {
-            generators.get(enabledGenerator).run();
+            Generator generator = generators.get(enabledGenerator);
+
+            if (generator == null) {
+                System.out.println(enabledGenerator + " not found!");
+
+                return;
+            }
+
+            generator.run();
         });
     }
 
