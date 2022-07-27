@@ -17,12 +17,22 @@ public class StubGenerator extends BaseGenerator {
             GeneratorProperties.StubName stubName = stub.getStub();
             String templatePath = stub.getTemplate();
 
-            if (stubName == GeneratorProperties.StubName.CURRENT_TEMPLATE_ENUM) {
+            if (stubName == GeneratorProperties.StubName.ENUM) {
                 output.getTemplates().forEach((templateName, template) -> {
                     template.getEnums().forEach(enumStub -> {
                         String outputPath = this.stringUtil.renderTemplate(templatePath + "_path", enumStub);
 
                         this.generateTo(templatePath, outputPath, enumStub);
+                    });
+                });
+            }
+
+            if (stubName == GeneratorProperties.StubName.MODEL) {
+                output.getTemplates().forEach((templateName, template) -> {
+                    template.getModels().forEach(modelStub -> {
+                        String outputPath = this.stringUtil.renderTemplate(templatePath + "_path", modelStub);
+
+                        this.generateTo(templatePath, outputPath, modelStub);
                     });
                 });
             }
