@@ -25,6 +25,13 @@ application {
 }
 
 allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'java'
 
@@ -33,10 +40,6 @@ allprojects {
     java {
         withJavadocJar()
         withSourcesJar()
-    }
-
-    repositories {
-        mavenCentral()
     }
 
     publishing {
