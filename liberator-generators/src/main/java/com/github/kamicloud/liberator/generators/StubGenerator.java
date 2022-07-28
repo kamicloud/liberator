@@ -15,7 +15,7 @@ public class StubGenerator extends BaseGenerator {
     public void run() {
         this.generatorProperties.getStubs().forEach(stub -> {
             GeneratorProperties.StubName stubName = stub.getStub();
-            String templatePath = stub.getTemplate();
+            String templatePath = stub.getPath();
 
             if (stubName == GeneratorProperties.StubName.OUTPUT) {
                 generateAll(templatePath, output);
@@ -100,7 +100,7 @@ public class StubGenerator extends BaseGenerator {
     }
 
     public void generateAll(String templatePath, Object param) {
-        String outputPath = this.stringUtil.renderTemplate(templatePath + "_path", param);
+        String outputPath = this.stringUtil.renderTemplate(templatePath, param);
 
         this.generateTo(templatePath, outputPath, param);
     }

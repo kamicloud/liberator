@@ -5,7 +5,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.5.4'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}'
     }
 }
 
@@ -13,7 +13,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'application'
-    id 'org.springframework.boot' version '2.5.4'
+    id 'org.springframework.boot' version "${springBootVersion}"
 }
 
 apply plugin: 'java'
@@ -49,20 +49,19 @@ allprojects {
 }
 
 dependencies {
-    implementation project(':liberator-templates')
+    implementation project(':liberator-definitions')
     implementation project(':liberator-core')
     implementation project(':liberator-generators')
-    implementation project(':liberator-laravel')
 
-    implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-logging:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-aop:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
+    implementation "org.springframework.boot:spring-boot-loader-tools:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-logging:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 test {

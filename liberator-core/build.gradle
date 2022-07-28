@@ -9,20 +9,20 @@ repositories {
 dependencies {
     implementation project(':liberator-definitions')
 
-    implementation 'com.github.javaparser:javaparser-core:3.23.1'
-    implementation 'com.github.javaparser:javaparser-symbol-solver-core:3.23.1'
-    implementation 'com.github.javaparser:javaparser-core-serialization:3.23.1'
+    implementation "com.github.javaparser:javaparser-core:${javaparserVersion}"
+    implementation "com.github.javaparser:javaparser-symbol-solver-core:${javaparserVersion}"
+    implementation "com.github.javaparser:javaparser-core-serialization:${javaparserVersion}"
 
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-loader-tools:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-logging:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-starter-aop:2.5.4'
-    implementation 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.4'
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-loader-tools:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-logging:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-aop:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
 }
 
 test {

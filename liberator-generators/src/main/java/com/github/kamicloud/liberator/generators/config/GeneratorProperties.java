@@ -151,8 +151,18 @@ public class GeneratorProperties {
     }
 
     public static class Stub {
+        private StubDriver driver;
         private StubName stub;
         private String template;
+        private String path;
+
+        public void setDriver(StubDriver driver) {
+            this.driver = driver;
+        }
+
+        public StubDriver getDriver() {
+            return this.driver;
+        }
 
         public StubName getStub() {
             return this.stub;
@@ -169,6 +179,19 @@ public class GeneratorProperties {
         public void setTemplate(String template) {
             this.template = template;
         }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+
+        public String getPath() {
+            return this.path;
+        }
+    }
+
+    public enum StubDriver {
+        GENERATE,
+        DELETE,
     }
 
     public enum StubName {
