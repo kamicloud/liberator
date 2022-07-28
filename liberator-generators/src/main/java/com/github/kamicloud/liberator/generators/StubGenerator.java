@@ -102,6 +102,7 @@ public class StubGenerator extends BaseGenerator {
 
     public void generateTo(String stubPath, String outputPath, Object param) {
         try {
+            outputPath = this.stringUtil.renderTemplate(outputPath, param);
             String value = this.stringUtil.renderTemplate(stubPath, param);
 
             FileCombiner.build(outputPath, value, true);
